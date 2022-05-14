@@ -21,12 +21,21 @@
     <script src="../blocks_vertical/looks.js"></script>
     <script src="../blocks_vertical/procedures.js"></script>
     <script src="../blocks_vertical/operators.js"></script>
-    <script src="../blocks_vertical/pen.js"></script>
+    <!-- <script src="../blocks_vertical/pen.js"></script> -->
     <script src="../blocks_vertical/sound.js"></script>
     <script src="../blocks_vertical/sensing.js"></script>
     <script src="../blocks_vertical/data.js"></script>
     <script src="../blocks_vertical/extensions.js"></script>
     <script src="../blocks_vertical/default_toolbox.js"></script>
+    <script src="../generators/python.js"></script>
+    <script src="../generators/python/colour.js"></script>
+    <script src="../generators/python/control.js"></script>
+    <script src="../generators/python/data.js"></script>
+    <script src="../generators/python/math.js"></script>
+    <script src="../generators/python/matrix.js"></script>
+    <script src="../generators/python/operator.js"></script>
+    <script src="../generators/python/procedures.js"></script>
+    <script src="../generators/python/text.js"></script>
 
     <script>
       'use strict';
@@ -134,6 +143,12 @@
         var xml = Blockly.Xml.textToDom(input.value);
         Blockly.Xml.domToWorkspace(xml, workspace);
         taChange();
+      }
+
+      function toCode(lang) {
+        var output = document.getElementById('importExport');
+        output.value = Blockly[lang].workspaceToCode(workspace);
+        // console.log(Blockly['Python'].workspaceToCode(workspace));
       }
 
       // Disable the "Import from XML" button if the XML is invalid.
@@ -532,6 +547,8 @@
       <input type="button" value="Export to XML" onclick="toXml()">
       &nbsp;
       <input type="button" value="Import from XML" onclick="fromXml()" id="import">
+      <br>
+      <input type="button" value="To Python" onclick="toCode('Python')">
       <br>
       <textarea id="importExport" style="width: 26%; height: 12em"
         onchange="taChange();" onkeyup="taChange()"></textarea>
